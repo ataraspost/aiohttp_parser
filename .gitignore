@@ -1,0 +1,18 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+\.idea/
+
+*.pyc
+
+db\.sqlite3
+
+\uploads
+
+celerybeat\.pid
+
+readme_my
+
+*.pid
+
+app/secret_settings\.py
+
+/venv
