@@ -11,7 +11,7 @@ HEADERS = {'User-Agent': 'Mozilla/5.0'}
 async def parser(url=None, timeout=0, instance_id=None):
     await asyncio.sleep(int(timeout))
     data = await get_result(url)
-    data[instance_id] = instance_id
+    data['instance_id'] = instance_id
     requests.post('http://localhost:8000/result/', data=data)
 
 
@@ -21,21 +21,22 @@ async def get_result(url):
     data = {}
 
     try:
-        data['titel'] = soup.title.get_text()
+        data['title'] = soup.title.get_text()
     except:
-        data['titel'] = 'error'
+        data['title'] = 'error'
 
     try:
         data['h1'] = list()
         for item in soup.find_all('h1'):
             data['h1'].append(item.get_text())
+        data['h1'] = ', '.join(data['h1'])
     except:
         data['h1'] = 'error'
 
     try:
-        data['charset'] = get_encoding(soup)
+        data['string_encoding'] = get_encoding(soup)
     except:
-        data['charset'] = 'error'
+        data['string_encoding'] = 'error'
 
     return data
 
